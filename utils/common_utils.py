@@ -13,6 +13,7 @@ def compute_metrics(dataset_true, dataset_pred,
     metrics = OrderedDict()
     metrics["Balanced accuracy"] = 0.5*(classified_metric_pred.true_positive_rate()+
                                              classified_metric_pred.true_negative_rate())
+    metrics["Normal accuracy"] = classified_metric_pred.accuracy()
     metrics["Statistical parity difference"] = classified_metric_pred.statistical_parity_difference()
     metrics["Disparate impact"] = classified_metric_pred.disparate_impact()
     metrics["Average odds difference"] = classified_metric_pred.average_odds_difference()
@@ -22,5 +23,4 @@ def compute_metrics(dataset_true, dataset_pred,
     if disp:
         for k in metrics:
             print("%s = %.4f" % (k, metrics[k]))
-    
     return metrics
